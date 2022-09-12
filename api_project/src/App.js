@@ -39,15 +39,13 @@ const App = () => {
       method: "DELETE",
     })
       .then((res) => {
-        if (res.status !== 200) {
-          return;
-        } else {
+        
           setUsers(
             users.filter((user) => {
               return user.id !== id;
             })
           );
-        }
+        
       })
       .catch((err) => {
         console.log(err);
