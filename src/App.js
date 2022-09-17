@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
 import AddUser from "./components/AddUser";
 import User from "./components/User";
+import ProductList from './components/products/ProductList'
 
 const App = () => {
   const [users, setUsers] = useState([]);
+  const [productList, setProductList] = useState()
   useEffect(() => {
     fetchData();
+    fetchProductData();
   }, []);
 
   const fetchData = async () => {
     await fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => res.json())
       .then((data) => setUsers(data))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const fetchProductData = async () => {
+    await fetch("https://dummyjson.com/products")
+      .then((res) => res.json())
+      .then((data) => setProductList(data))
       .catch((err) => {
         console.log(err);
       });
@@ -63,7 +74,6 @@ const App = () => {
       });
   };
 
-  console.log(users);
   return (
     <div className="App">
       <h3>My Project</h3>
@@ -81,8 +91,17 @@ const App = () => {
           />
         ))}
       </div>
+      <hr/>
+      <div>
+        {productList.products.map((data) => 
+        (<ProductList title={data.title} brand={data.brand} description ={data.description} rating ={data.rating} image ={data.thumbnail}/>)
+        
+        )}
+      </div>
+
     </div>
   );
 };
-
 export default App;
+
+
