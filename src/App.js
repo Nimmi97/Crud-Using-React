@@ -1,29 +1,46 @@
 import React, { useEffect, useState } from "react";
 import AddUser from "./components/AddUser";
 import User from "./components/User";
+import ProductList from './components/products/ProductList';
 
 const App = () => {
   const [users, setUsers] = useState([]);
+  const [productList, setProductList] = useState(null);
   useEffect(() => {
-    fetchData();
+    fetchUsers();
+    fetchProductData();
   }, []);
 
-  const fetchData = async () => {
-    await fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data))
-      .catch((err) => {
-        console.log(err);
-      });
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/users");
+      const users = await response.json();
+      setUsers(users);
+    }
+    catch (e) {
+      console.log(e);
+    }
+
+  };
+  const fetchProductData = async () => {
+    try {
+      const response = await fetch("https://dummyjson.com/products")
+      const productList = await response.json();
+      setProductList(productList);
+    }
+    catch (e) {
+      console.log(e);
+    }
   };
 
   const onAdd = async (name, email) => {
     await fetch("https://jsonplaceholder.typicode.com/users", {
       method: "POST",
-      body: JSON.stringify({
-        name: name,
-        email: email,
-      }),
+      body:
+        JSON.stringify({
+          name: name,
+          email: email,
+        }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
@@ -63,26 +80,27 @@ const App = () => {
       });
   };
 
-  console.log(users);
   return (
-    <div className="App">
-      <h3>My Project</h3>
-
-      <br />
+    <div>
       <AddUser onAdd={onAdd} />
+      {users.map((user) => (
+        <User
+          id={user.id}
+          key={user.id}
+          name={user.name}
+          email={user.email}
+          onDelete={onDelete}
+        />
+      ))}
       <div>
-        {users.map((user) => (
-          <User
-            id={user.id}
-            key={user.id}
-            name={user.name}
-            email={user.email}
-            onDelete={onDelete}
-          />
-        ))}
+        {productList.products.map((data) =>
+          (<ProductList title={data.title} key={data.id} brand={data.brand} description={data.description} rating={data.rating} image={data.thumbnail} />)
+        )}
       </div>
     </div>
+
   );
 };
-
 export default App;
+
+

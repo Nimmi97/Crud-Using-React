@@ -1,21 +1,20 @@
-import React from 'react'
-import './user.css'
+import React from 'react';
+import './user.css';
 
-const User = ({id,email,name,onDelete}) => {
+const User = ({ id, email, name, onDelete }) => {
 
     const handleDelete = () => {
         onDelete(id);
     }
-
     return (
         <div className='list'>
             <span>{name}</span>
             <span>{email}</span>
             <span>
-                <button onClick={handleDelete}>delete</button>
+                <button className='delete-Button' onClick={handleDelete}>Delete</button>
             </span>
         </div>
     )
-}
+};
 
-export default User
+export default User; 
