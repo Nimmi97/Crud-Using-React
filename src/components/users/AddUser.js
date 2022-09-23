@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import './user.css';
+
 const AddUser = ({ onAdd }) => {
-
   const [userData, setUserData] = useState({ name: '', email: '' });
-
   const handleOnSubmit = (e) => {
     e.preventDefault();
     onAdd(userData.name, userData.email);
