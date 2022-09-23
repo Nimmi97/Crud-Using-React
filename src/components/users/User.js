@@ -2,7 +2,6 @@ import React from 'react';
 import './user.css';
 
 const User = ({ id, email, name, onDelete }) => {
-
     const handleDelete = () => {
         onDelete(id);
     }

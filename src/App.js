@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import AddUser from "./components/AddUser";
-import User from "./components/User";
+import AddUser from "./components/users/AddUser";
+import User from "./components/users/User";
 import ProductList from './components/products/ProductList';
+import NavBar from './components/header/NavBar';
+import { Routes, Route } from "react-router-dom";
+
 
 const App = () => {
   const [users, setUsers] = useState([]);
@@ -26,7 +29,7 @@ const App = () => {
     try {
       const response = await fetch("https://dummyjson.com/products")
       const productList = await response.json();
-      setProductList(productList);
+      setProductList(productList.products);
     }
     catch (e) {
       console.log(e);
@@ -79,24 +82,23 @@ const App = () => {
         console.log(err);
       });
   };
-
   return (
     <div>
-      <AddUser onAdd={onAdd} />
-      {users.map((user) => (
-        <User
-          id={user.id}
-          key={user.id}
-          name={user.name}
-          email={user.email}
-          onDelete={onDelete}
-        />
-      ))}
-      <div>
-        {productList.products.map((data) =>
-          (<ProductList title={data.title} key={data.id} brand={data.brand} description={data.description} rating={data.rating} image={data.thumbnail} />)
-        )}
-      </div>
+      <NavBar />
+      <Routes>
+        <Route path="/addUser" element={<AddUser onAdd={onAdd} />} />
+        <Route path="/products" element={<ProductList data={productList} />} />
+        <Route path="/" element={users.map((user) => (
+          <User
+            id={user.id}
+            key={user.id}
+            name={user.name}
+            email={user.email}
+            onDelete={onDelete}
+
+          />
+        ))} />
+      </Routes>
     </div>
 
   );
