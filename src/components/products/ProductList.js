@@ -27,7 +27,7 @@ justify-content: space-evenly;;
 function ProductList({ data }) {
     return (
         <ProductContainer>{
-            data?.map(items => <Container><img src={items.thumbnail} alt='image loading' width="250px" height="200px" />
+            data?.map(items => <Container key={items.id}><img src={items.thumbnail} alt='image loading' width="250px" height="200px" />
                 <ProductName>Model: {items.title}</ProductName>
                 <ProductName> Brand:{items.brand}</ProductName>
                 <ProductName>Discription: {items.description}</ProductName>

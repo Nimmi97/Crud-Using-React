@@ -4,7 +4,8 @@ import User from "./components/users/User";
 import ProductList from './components/products/ProductList';
 import NavBar from './components/header/NavBar';
 import { Routes, Route } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const [users, setUsers] = useState([]);
@@ -21,7 +22,12 @@ const App = () => {
       setUsers(users);
     }
     catch (e) {
-      console.log(e);
+      toast.error(e.message, {
+        position: "top-right",
+        hideProgressBar: true,
+        closeOnClick: true,
+        rtl: false,
+      });
     }
 
   };
@@ -32,7 +38,12 @@ const App = () => {
       setProductList(productList.products);
     }
     catch (e) {
-      console.log(e);
+      toast.error(e.message, {
+        position: "top-right",
+        hideProgressBar: true,
+        closeOnClick: true,
+        rtl: false,
+      });
     }
   };
 
@@ -59,7 +70,12 @@ const App = () => {
         setUsers((users) => [...users, data]);
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(err.message, {
+          position: "top-right",
+          hideProgressBar: true,
+          closeOnClick: true,
+          rtl: false,
+        });
       });
   };
 
@@ -79,7 +95,12 @@ const App = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(err.message, {
+          position: "top-right",
+          hideProgressBar: true,
+          closeOnClick: true,
+          rtl: false
+        });
       });
   };
   return (
@@ -99,6 +120,8 @@ const App = () => {
           />
         ))} />
       </Routes>
+      <ToastContainer />
+
     </div>
 
   );
