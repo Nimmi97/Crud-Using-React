@@ -33,7 +33,7 @@ const App = () => {
   };
   const fetchProductData = async () => {
     try {
-      const response = await fetch("https://dummyjson.com/products")
+      const response = await fetch("https://dummyjson.com/products");
       const productList = await response.json();
       setProductList(productList.products);
     }
@@ -121,7 +121,6 @@ const App = () => {
         ))} />
       </Routes>
       <ToastContainer />
-
     </div>
 
   );
