@@ -11,6 +11,8 @@ import axios from 'axios';
 const App = () => {
   const [users, setUsers] = useState([]);
   const [productList, setProductList] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
     fetchUsers();
     fetchProductData();
@@ -28,7 +30,6 @@ const App = () => {
   const fetchProductData = async () => {
     try {
       const productList = await axios.get('https://dummyjson.com/products');
-      console.log(productList);
       setProductList(productList.data.products);
     } catch (e) {
       toast.error(e.message);
@@ -46,7 +47,6 @@ const App = () => {
       toast.error(err);
     }
   };
-
   const onDelete = async (id) => {
     try {
       await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
@@ -59,12 +59,32 @@ const App = () => {
       toast.error(error);
     }
   };
+  const inputHandler = (searchQuery) => {
+    setSearchQuery(searchQuery);
+
+    if (searchQuery !== '') {
+      const filteredProductList = productList.filter((listItems) => {
+        return Object.values(listItems).join('').toLocaleLowerCase().includes(searchQuery.toLocaleLowerCase());
+      });
+      setSearchResults(filteredProductList);
+    }
+  };
+
   return (
     <div>
       <NavBar />
       <Routes>
         <Route path="/addUser" element={<AddUser onAdd={onAdd} />} />
-        <Route path="/products" element={<ProductList data={productList} />} />
+        <Route
+          path="/products"
+          element={
+            <ProductList
+              inputHandler={inputHandler}
+              searchQuery={searchQuery}
+              data={searchQuery.length < 1 ? productList : searchResults}
+            />
+          }
+        />
         <Route
           path="/"
           element={users.map((user) => (
