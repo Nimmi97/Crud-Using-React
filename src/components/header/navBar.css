@@ -10,13 +10,7 @@
   
   .navbar {
     font-size: 18px;
-  
     background: #000046;
-    background: -webkit-linear-gradient(
-      to left,
-      #1cb5e0,
-      #000046
-    ); 
     background: linear-gradient(
       to left,
       #1cb5e0,
