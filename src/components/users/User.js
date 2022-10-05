@@ -1,7 +1,7 @@
 import React from 'react';
 import './user.css';
 
-function User({ id, email, name, onDelete }) {
+const User = ({ id, email, name, onDelete }) => {
   const handleDelete = () => {
     onDelete(id);
   };
@@ -17,6 +17,6 @@ function User({ id, email, name, onDelete }) {
       </span>
     </div>
   );
-}
+};
 
 export default User;

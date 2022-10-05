@@ -11,14 +11,14 @@ const ProductItemContainer = styled.div`
   cursor: pointer;
 `;
 
-function ProductItem({ title, brand, imgage, description, rating }) {
+function ProductItem({ productInfo }) {
   return (
     <ProductItemContainer>
-      <img src={imgage} className="productImage" alt={`${title}`} />
-      <span className="productInfoItem">Model: {title}</span>
-      <span className="productInfoItem">Brand: {brand}</span>
-      <span className="productInfoItem">Description: {description}</span>
-      <span className="productInfoItem">Ratings: {rating}</span>
+      <img src={productInfo.image} className="productImage" alt={`${productInfo.title}`} />
+      <span className="productInfoItem">Model: {productInfo.title}</span>
+      <span className="productInfoItem">Brand: {productInfo.brand}</span>
+      <span className="productInfoItem">Description: {productInfo.description}</span>
+      <span className="productInfoItem">Ratings: {productInfo.rating}</span>
     </ProductItemContainer>
   );
 }

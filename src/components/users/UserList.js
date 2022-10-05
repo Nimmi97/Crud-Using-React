@@ -11,7 +11,6 @@ const UserList = () => {
       {users.map((user) => (
         <User key={user.id} name={user.name} email={user.email} id={user.id} onDelete={onDelete} />
       ))}
-      ;
     </>
   );
 };

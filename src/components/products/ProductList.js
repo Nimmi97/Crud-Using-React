@@ -55,12 +55,14 @@ function ProductList() {
       <ProductContainer>
         {productListData?.map((item) => (
           <ProductItem
-            imgage={item.thumbnail}
-            key={item.id}
-            title={item.title}
-            brand={item.brand}
-            description={item.description}
-            rating={item.rating}
+            productInfo={{
+              image: item.thumbnail,
+              key: item.id,
+              brand: item.brand,
+              description: item.description,
+              rating: item.rating,
+              title: item.title,
+            }}
           />
         ))}
       </ProductContainer>
