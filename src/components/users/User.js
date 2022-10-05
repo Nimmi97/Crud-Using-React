@@ -1,10 +1,11 @@
 import React from 'react';
 import './user.css';
 
-const User = ({ id, email, name, onDelete }) => {
+function User({ id, email, name, onDelete }) {
   const handleDelete = () => {
     onDelete(id);
   };
+
   return (
     <div className="list">
       <span>{name}</span>
@@ -16,6 +17,6 @@ const User = ({ id, email, name, onDelete }) => {
       </span>
     </div>
   );
-};
+}
 
 export default User;

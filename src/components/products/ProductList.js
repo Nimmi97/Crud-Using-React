@@ -1,66 +1,70 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  width: 280px;
-  box-shadow: 0 3px 10px 0 #aaa;
-  cursor: pointer;
-`;
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import ProductItem from './ProductItem';
 
-const ProductName = styled.span`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   padding: 30px;
   gap: 25px;
-  justify-content: space-evenly; ;
-`;
-const InputConatainer = styled.div`
-  display: flex;
-`;
-const Button = styled.button`
-  margin: 5px;
-  padding: 5px;
-  background: linear-gradient(to left, #1cb5e0, #000046);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: white;
-  border-radius: 5px;
+  justify-content: space-evenly;
 `;
 
-function ProductList({ data, searchQuery, inputHandler }) {
-  const inputRef = useRef('');
-  const getinputValue = () => {
-    inputHandler(inputRef.current.value);
+function ProductList() {
+  const [productList, setProductList] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  useEffect(() => {
+    fetchProductList();
+  }, []);
+
+  const fetchProductList = async () => {
+    try {
+      const productList = await axios.get('https://dummyjson.com/products');
+      setProductList(productList.data.products);
+    } catch (e) {
+      toast.error(e.message);
+    }
   };
+
+  const onInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const searchableFields = ['title', 'brand', 'description', 'category'];
+
+  useEffect(() => {
+    if (searchQuery) {
+      const search = searchQuery.toLowerCase();
+      const filteredProductList = productList.filter((listItem) => {
+        return searchableFields.find((key) => listItem[key].toLowerCase().includes(search));
+      });
+      setSearchResults(filteredProductList);
+    }
+  }, [searchQuery]);
+
+  const productListData = searchQuery.length < 1 ? productList : searchResults;
 
   return (
     <>
-      <InputConatainer>
-        {' '}
-        <input value={searchQuery} onChange={getinputValue} ref={inputRef} />
-        <Button onClick={getinputValue}>Search</Button>
-      </InputConatainer>
-
+      <input className="inputBox" value={searchQuery} onChange={onInputChange} placeHolder="Enter Product Here" />
       <ProductContainer>
-        {data?.map((items) => (
-          <Container key={items.id}>
-            <img src={items.thumbnail} alt="image loading" width="250px" height="200px" />
-            <ProductName>Model: {items.title}</ProductName>
-            <ProductName> Brand:{items.brand}</ProductName>
-            <ProductName>Discription: {items.description}</ProductName>
-            <ProductName>Ratings: {items.rating}</ProductName>
-          </Container>
+        {productListData?.map((item) => (
+          <ProductItem
+            imgage={item.thumbnail}
+            key={item.id}
+            title={item.title}
+            brand={item.brand}
+            description={item.description}
+            rating={item.rating}
+          />
         ))}
       </ProductContainer>
     </>
   );
 }
-
 export default ProductList;

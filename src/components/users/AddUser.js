@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Data } from '../context/UserContext';
 import './user.css';
 
-const AddUser = ({ onAdd }) => {
+const AddUser = () => {
   const [userData, setUserData] = useState({ name: '', email: '' });
+  const { onAdd } = useContext(Data);
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     onAdd(userData.name, userData.email);
