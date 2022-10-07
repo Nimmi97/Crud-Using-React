@@ -14,7 +14,7 @@ const ProductItemContainer = styled.div`
 function ProductItem({ productInfo }) {
   return (
     <ProductItemContainer>
-      <img src={productInfo.image} className="productImage" alt={`${productInfo.title}`} />
+      <img src={productInfo.thumbnail} className="productImage" alt={`${productInfo.title}`} />
       <span className="productInfoItem">Model: {productInfo.title}</span>
       <span className="productInfoItem">Brand: {productInfo.brand}</span>
       <span className="productInfoItem">Description: {productInfo.description}</span>

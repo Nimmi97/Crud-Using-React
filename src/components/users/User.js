@@ -1,20 +1,19 @@
 import React from 'react';
 import './user.css';
 
-const User = ({ id, email, name, onDelete }) => {
+const User = ({ user, onDelete }) => {
   const handleDelete = () => {
-    onDelete(id);
+    onDelete(user.id);
   };
 
   return (
     <div className="list">
-      <span>{name}</span>
-      <span>{email}</span>
-      <span>
-        <button className="delete-Button" onClick={handleDelete}>
-          Delete
-        </button>
-      </span>
+      <span>{user.name}</span>
+      <span>{user.email}</span>
+
+      <button className="delete-Button" onClick={handleDelete}>
+        Delete
+      </button>
     </div>
   );
 };

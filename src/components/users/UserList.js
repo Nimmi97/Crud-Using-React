@@ -5,14 +5,7 @@ import { useContext } from 'react';
 
 const UserList = () => {
   const { users, onDelete } = useContext(Data);
-  console.log(useContext(Data));
-  return (
-    <>
-      {users.map((user) => (
-        <User key={user.id} name={user.name} email={user.email} id={user.id} onDelete={onDelete} />
-      ))}
-    </>
-  );
+  return users.map((user) => <User key={user.id} user={user} onDelete={onDelete} />);
 };
 
 export default UserList;

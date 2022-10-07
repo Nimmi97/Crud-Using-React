@@ -4,7 +4,7 @@ import './navBar.css';
 
 function NavBar() {
   return (
-    <nav nav className="navbar">
+    <nav className="navbar">
       <ul className="main-nav">
         <li>
           <Link className="nav-links" to="/">

@@ -22,6 +22,7 @@ const AddUser = () => {
           value={userData.name}
           onChange={(e) => setUserData({ name: e.target.value })}
           required
+          type="text"
         />
         <input
           placeholder="Email"

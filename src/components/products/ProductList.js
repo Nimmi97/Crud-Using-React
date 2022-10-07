@@ -51,18 +51,12 @@ function ProductList() {
 
   return (
     <>
-      <input className="inputBox" value={searchQuery} onChange={onInputChange} placeHolder="Enter Product Here" />
+      <input className="inputBox" value={searchQuery} onChange={onInputChange} placeholder="Enter Product Here" />
       <ProductContainer>
         {productListData?.map((item) => (
           <ProductItem
-            productInfo={{
-              image: item.thumbnail,
-              key: item.id,
-              brand: item.brand,
-              description: item.description,
-              rating: item.rating,
-              title: item.title,
-            }}
+            key={item.id}
+            productInfo={item}
           />
         ))}
       </ProductContainer>

@@ -20,14 +20,15 @@ function UserContext({ children }) {
   }
 
   const onAdd = async (name, email) => {
+    console.log('Name', name, email);
     try {
-      const resp = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+      const resp = await axios.post('https://jsonplaceholder.typicode.com/users', {
         name: name,
         email: email,
       });
-      setUsers((users) => [...users, resp]);
-    } catch (err) {
-      toast.error(err);
+      setUsers([resp, ...users]);
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
@@ -40,7 +41,7 @@ function UserContext({ children }) {
         })
       );
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
   return <Data.Provider value={{ users, onAdd, onDelete }}>{children}</Data.Provider>;
