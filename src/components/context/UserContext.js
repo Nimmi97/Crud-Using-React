@@ -12,21 +12,20 @@ function UserContext({ children }) {
 
   async function fetchUsers() {
     try {
-      const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-      setUsers(response.data);
+      const resp = await axios.get('https://jsonplaceholder.typicode.com/users');
+      setUsers(resp.data);
     } catch (error) {
       toast.error(error.message);
     }
   }
 
   const onAdd = async (name, email) => {
-    console.log('Name', name, email);
     try {
       const resp = await axios.post('https://jsonplaceholder.typicode.com/users', {
         name: name,
         email: email,
       });
-      setUsers([resp, ...users]);
+      setUsers([resp.data, ...users]);
     } catch (error) {
       toast.error(error.message);
     }

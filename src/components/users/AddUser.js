@@ -12,15 +12,22 @@ const AddUser = () => {
     setUserData({ name: '', email: '' });
   };
 
+  const onFieldChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div className="formContainer">
       <form onSubmit={handleOnSubmit}>
         <h2>Add New User</h2>
         <input
-          placeholder="Name"
           name="name"
           value={userData.name}
-          onChange={(e) => setUserData({ name: e.target.value })}
+          onChange={onFieldChange}
+          placeholder="Name"
           required
           type="text"
         />
@@ -28,7 +35,7 @@ const AddUser = () => {
           placeholder="Email"
           name="email"
           value={userData.email}
-          onChange={(e) => setUserData({ email: e.target.value })}
+          onChange={onFieldChange}
           required
           type="email"
         />
