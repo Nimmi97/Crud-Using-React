@@ -54,10 +54,7 @@ function ProductList() {
       <input className="inputBox" value={searchQuery} onChange={onInputChange} placeholder="Enter Product Here" />
       <ProductContainer>
         {productListData?.map((item) => (
-          <ProductItem
-            key={item.id}
-            productInfo={item}
-          />
+          <ProductItem key={item.id} productInfo={item} />
         ))}
       </ProductContainer>
     </>

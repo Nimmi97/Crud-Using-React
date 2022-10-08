@@ -10,8 +10,7 @@ const User = ({ user, onDelete }) => {
     <div className="list">
       <span>{user.name}</span>
       <span>{user.email}</span>
-
-      <button className="delete-Button" onClick={handleDelete}>
+      <button className="delete-button" onClick={handleDelete}>
         Delete
       </button>
     </div>

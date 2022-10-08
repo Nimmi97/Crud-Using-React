@@ -20,25 +20,11 @@ const AddUser = () => {
   };
 
   return (
-    <div className="formContainer">
+    <div className="form-container">
       <form onSubmit={handleOnSubmit}>
         <h2>Add New User</h2>
-        <input
-          name="name"
-          value={userData.name}
-          onChange={onFieldChange}
-          placeholder="Name"
-          required
-          type="text"
-        />
-        <input
-          placeholder="Email"
-          name="email"
-          value={userData.email}
-          onChange={onFieldChange}
-          required
-          type="email"
-        />
+        <input name="name" value={userData.name} onChange={onFieldChange} placeholder="Name" required type="text" />
+        <input placeholder="Email" name="email" value={userData.email} onChange={onFieldChange} required type="email" />
         <button className="form-button" onSubmit={handleOnSubmit}>
           Add
         </button>

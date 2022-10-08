@@ -12,9 +12,9 @@ const App = () => {
     <div>
       <NavBar />
       <Routes>
-        <Route path="/addUser" element={<AddUser />} />
+        <Route path="/" element={<AddUser />} />
+        <Route path="/users-list" element={<UserList />} />
         <Route path="/products" element={<ProductList />} />
-        <Route path="/" element={<UserList />} />
       </Routes>
       <ToastContainer
         theme="colored"
