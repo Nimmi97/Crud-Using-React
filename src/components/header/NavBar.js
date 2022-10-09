@@ -8,12 +8,12 @@ function NavBar() {
       <ul className="main-nav">
         <li>
           <Link className="nav-links" to="/">
-            User's-List
+            Add-User
           </Link>
         </li>
         <li>
-          <Link className="nav-links" to="/addUser">
-            Add-User
+          <Link className="nav-links" to="/users-list">
+            User's-List
           </Link>
         </li>
         <li>

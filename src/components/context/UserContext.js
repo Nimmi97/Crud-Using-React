@@ -1,10 +1,12 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 export const Data = createContext({});
 
 function UserContext({ children }) {
   const [users, setUsers] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     fetchUsers();
@@ -13,6 +15,7 @@ function UserContext({ children }) {
   async function fetchUsers() {
     try {
       const resp = await axios.get('https://jsonplaceholder.typicode.com/users');
+
       setUsers(resp.data);
     } catch (error) {
       toast.error(error.message);
@@ -26,6 +29,7 @@ function UserContext({ children }) {
         email: email,
       });
       setUsers([resp.data, ...users]);
+      navigate('/users-list');
     } catch (error) {
       toast.error(error.message);
     }
